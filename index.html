@@ -6,7 +6,7 @@
 <title>英尺英寸转换器 🐱</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; gap: 24px; }
 .card { background: white; border-radius: 20px; padding: 40px; max-width: 480px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
 h1 { text-align: center; color: #333; margin-bottom: 8px; font-size: 24px; }
 .subtitle { text-align: center; color: #888; margin-bottom: 30px; font-size: 14px; }
@@ -80,6 +80,31 @@ input[type="number"]:focus { border-color: #667eea; }
   </div>
 </div>
 
+<div class="card">
+  <div class="emoji">🔄</div>
+  <h1>平方英尺 → 平方米</h1>
+  <p class="subtitle">直接输入面积，快速转换</p>
+
+  <div class="input-group">
+    <label>📐 面积</label>
+    <div class="field">
+      <label>平方英尺 (sqft)</label>
+      <input type="number" id="sqftIn" placeholder="例如 1200" min="0" oninput="calcSqft()">
+    </div>
+  </div>
+
+  <div class="result-box">
+    <div class="result-item">
+      <span class="result-label">平方米</span>
+      <span class="result-value" id="sqmOut">0 <span class="unit">㎡</span></span>
+    </div>
+    <div class="result-item">
+      <span class="result-label">约等于</span>
+      <span class="result-value" id="pingOut">0 <span class="unit">坪</span></span>
+    </div>
+  </div>
+</div>
+
 <script>
 function calc() {
   const ft1 = parseFloat(document.getElementById('ft1').value) || 0;
@@ -98,6 +123,14 @@ function calc() {
   document.getElementById('r2').innerHTML = m2.toFixed(2) + ' <span class="unit">米</span>';
   document.getElementById('r3').innerHTML = sqm.toFixed(2) + ' <span class="unit">平方米</span>';
   document.getElementById('r4').innerHTML = sqft.toFixed(2) + ' <span class="unit">平方英尺</span>';
+}
+
+function calcSqft() {
+  const sqft = parseFloat(document.getElementById('sqftIn').value) || 0;
+  const sqm = sqft * 0.092903;
+  const ping = sqm / 3.30579;
+  document.getElementById('sqmOut').innerHTML = sqm.toFixed(2) + ' <span class="unit">㎡</span>';
+  document.getElementById('pingOut').innerHTML = ping.toFixed(2) + ' <span class="unit">坪</span>';
 }
 </script>
 </body>
